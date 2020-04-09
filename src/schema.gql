@@ -1,0 +1,15 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Query {
+  user(id: Float!): User!
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  isActive: Boolean!
+  role: String!
+}

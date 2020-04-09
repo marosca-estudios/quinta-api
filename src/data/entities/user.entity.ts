@@ -4,16 +4,16 @@ import { UserRole } from 'src/data/enums/user.enum'
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column()
-  firstName: string;
+  firstName: string
 
   @Column()
-  lastName: string;
+  lastName: string
 
   @Column({ default: true })
-  isActive: boolean;
+  isActive: boolean
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
   role: UserRole
