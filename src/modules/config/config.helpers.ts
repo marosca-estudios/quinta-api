@@ -1,4 +1,4 @@
-import { modulesMapper } from './modules.mappers'
+import { moduleMappers } from './config.module.mappers'
 import { DynamicModule } from '@nestjs/common/interfaces'
 
 /**
@@ -13,14 +13,14 @@ export const mapModules = (providedModules: Array<string>): Array<DynamicModule>
 
   const { keys, values } = Object
 
-  let applicationModules = []
-  keys(modulesMapper)
+  const applicationModules = []
+  keys(moduleMappers)
     .forEach((moduleName, index) => {
       const match = providedModules.findIndex(providedModule => providedModule === moduleName)
 
       if (match !== -1)
       {
-        applicationModules.push(values(modulesMapper)[index])
+        applicationModules.push(values(moduleMappers)[index])
       }
     })
 

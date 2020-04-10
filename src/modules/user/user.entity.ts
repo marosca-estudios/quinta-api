@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
-import { UserRole } from 'src/data/enums/user.enum'
+import { UserRole } from 'src/modules/user/user.enum'
 
 @Entity()
 export class User {
@@ -7,10 +7,10 @@ export class User {
   id: number
 
   @Column()
-  firstName: string
+  username: string
 
   @Column()
-  lastName: string
+  password: string
 
   @Column({ default: true })
   isActive: boolean
