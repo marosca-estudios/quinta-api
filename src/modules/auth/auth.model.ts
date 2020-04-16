@@ -3,10 +3,16 @@ import { User } from '../user/user.model';
 
 @ObjectType()
 export class Auth {
-  @Field(type => User)
-  user: User
-
   @Field()
   token: string
-
 }
+
+@ObjectType()
+export class AuthUser {
+  @Field()
+  id: number
+
+  @Field()
+  username: string
+}
+

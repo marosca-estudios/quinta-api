@@ -1,14 +1,23 @@
-import { NotFoundException } from '@nestjs/common'
+import { NotFoundException, UseGuards, ConflictException } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql'
-import { PubSub } from 'apollo-server-express'
 import { User } from 'src/modules/user/user.model'
 import { UserProvider } from 'src/modules/user/user.provider'
-
-const pubSub = new PubSub()
+import { GqlAuthGuard } from 'src/modules/graphql/graphql.guard'
+import { CurrentUser } from '../graphql/decorators/current-user'
+import { AuthUser } from '../auth/auth.model'
+import { AuthProvider } from '../auth/auth.provider'
 
 @Resolver(of => User)
 export class UserResolver {
-  constructor(private readonly userProvider: UserProvider) {}
+  constructor(
+    private readonly userProvider: UserProvider,
+  ) {}
+
+  @Query(returns => User)
+  @UseGuards(GqlAuthGuard)
+  whoAmI(@CurrentUser() user: AuthUser) {
+    return this.userProvider.findById(user.id)
+  }
 
   @Query(returns => User)
   async findById(
@@ -35,5 +44,6 @@ export class UserResolver {
 
     return user
   }
+
 }
 

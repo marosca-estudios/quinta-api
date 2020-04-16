@@ -5,9 +5,10 @@ import { join } from 'path'
 @Module({
   imports: [
     NestjsGraphQLModule.forRoot({
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      context: ({ req }) => ({ req }),
       installSubscriptionHandlers: true,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql')
     })
   ]
 })
-export class GraphQLModule{}
+export class GraphQLModule {}
